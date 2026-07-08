@@ -1,5 +1,0 @@
-Primeiro dia 07/07/2026
-
-Foi-se decidido criar um projeto de um sistema de venda de Ingressos de um estadio.
-
-a primeira coisa decidido foi-se criar a estrutura de banco de dados somente para dar um pontapé

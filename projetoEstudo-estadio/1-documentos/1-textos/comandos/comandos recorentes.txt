@@ -1,5 +1,0 @@
-npx sequelize-cli migration:generate --name create-NOMETABELA
-npx sequelize-cli db:migrate
-
-rodar:
-npm run dev
