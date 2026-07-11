@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize'
 import { conecta } from '../config/conecta'
+import { EstadioInterface } from '../interfaces/estadioInterface'
 
 export const EstadioSchema = conecta.define(
   'estadio',
@@ -18,10 +19,6 @@ export const EstadioSchema = conecta.define(
       type: DataTypes.STRING(100),
       allowNull: false
     },
-    endereco: {
-      type: DataTypes.STRING(255),
-      allowNull: false
-    }
   },
   {
     tableName: 'estadio',
@@ -34,13 +31,10 @@ export class EstadioQuery {
     return EstadioSchema
   }
 
-  async salvarEstadio(dados: {
-    desc_estadio: string
-    cidade: string
-    endereco: string
-  }) {
+  async salvarEstadio(estadio: EstadioInterface) {
     try {
-      return await EstadioSchema.create(dados)
+      const { desc_estadio, cidade } = estadio
+      return await EstadioSchema.create({ desc_estadio, cidade })
     } catch (error) {
       throw error
     }

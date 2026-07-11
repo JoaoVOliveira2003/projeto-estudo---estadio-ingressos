@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 
 export const conecta = new Sequelize(
-  process.env.DB_NAME || "testes",
+  process.env.DB_NAME || "ingressosEstadio",
   process.env.DB_USER || "postgres",
   process.env.DB_PASS || "senha",
   {
