@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize'
 import { conecta } from '../config/conecta'
 
 export const EstadioSchema = conecta.define(
-  'Estadio',
+  'estadio',
   {
     cod_estadio: {
       type: DataTypes.INTEGER,

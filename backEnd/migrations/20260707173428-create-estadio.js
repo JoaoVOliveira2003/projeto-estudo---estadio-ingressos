@@ -17,10 +17,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING(100)
       },
-      endereco: {
-        allowNull: false,
-        type: Sequelize.STRING(255)
-      }
+      // endereco: {
+      //   allowNull: false,
+      //   type: Sequelize.STRING(255)
+      // }
     });
   },
 

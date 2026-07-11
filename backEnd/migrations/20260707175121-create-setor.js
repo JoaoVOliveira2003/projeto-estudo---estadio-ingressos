@@ -23,14 +23,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING(100)
       },
-      cor_setor: {
-        allowNull: false,
-        type: Sequelize.STRING(30)
-      },
-      capacidade: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      }
     });
   },
 

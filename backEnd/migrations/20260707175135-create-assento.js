@@ -23,10 +23,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING(5)
       },
-      numero: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      }
     });
   },
 

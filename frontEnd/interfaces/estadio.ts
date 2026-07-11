@@ -1,6 +1,8 @@
-import {Setor} from "../interfaces/setor"
+import {setorInterface} from "../interfaces/setor"
+
 export interface EstadioInterface {
-  nome: string
+  cod_estadio:number
+  desc_estadio: string
   cidade: string
-  setores: Setor[]
+  setores?: setorInterface[]
 }
