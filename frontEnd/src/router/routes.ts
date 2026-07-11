@@ -4,15 +4,16 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
-    children: [{ 
-      path: '', component: () => import('pages/estadio1.vue') },
+    children: [
       {
-      path: '/estadio2', component: () => import('pages/estadio2.vue') 
+        path: '',
+        component: () => import('pages/estadio1.vue'),
       },
       {
-      path: '/criadorDeEstadioBasico', component: () => import('pages/criadorDeEstadioBasico.vue') 
-      }
-  ],
+        path: '/criadorDeEstadio',
+        component: () => import('pages/criadorDeEstadio.vue'),
+      },
+    ],
   },
 
   {

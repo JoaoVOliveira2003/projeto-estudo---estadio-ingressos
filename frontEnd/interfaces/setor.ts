@@ -4,3 +4,4 @@ export interface Setor {
   fileiras: number
   assentos: number
 }
+

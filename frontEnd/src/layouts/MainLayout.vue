@@ -18,23 +18,15 @@
             <q-icon name="people" />
           </q-item-section>
           <q-item-section>
-            Estadio 1
+            Quadrados vermelhos fundo preto
           </q-item-section>
         </q-item>
-        <q-item clickable v-ripple to="/estadio2">
+        <q-item clickable v-ripple to="criadorDeEstadio">
           <q-item-section avatar>
             <q-icon name="people" />
           </q-item-section>
           <q-item-section>
-            Estadio 2
-          </q-item-section>
-        </q-item>
-        <q-item clickable v-ripple to="/estadio2">
-          <q-item-section avatar>
-            <q-icon name="people" />
-          </q-item-section>
-          <q-item-section>
-            criadorDeEstadioBasico
+            Criador de estadio.
           </q-item-section>
         </q-item>
 
