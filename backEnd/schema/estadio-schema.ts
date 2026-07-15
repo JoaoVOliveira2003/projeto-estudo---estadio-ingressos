@@ -39,4 +39,9 @@ export class EstadioQuery {
       throw error
     }
   }
+
+  async getTodosEstadios(){
+    return await EstadioSchema.findAll();
+  }
+  
 }

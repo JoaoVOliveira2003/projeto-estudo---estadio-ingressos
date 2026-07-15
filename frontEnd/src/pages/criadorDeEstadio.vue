@@ -9,7 +9,7 @@
       @update:cidade="cidade = $event" 
       @criar-setor="criarSetor"
       @remover-setor="removerSetor"
-      @salvar-estadio="salvarEstadio" />
+      @salvar-estadio="gravarEstadio" />
     </div>
     <div class="col-9" style="height: 100%">
       <Estadio :setores="setores" :nome-estadio="nomeEstadio" :cidade="cidade" />
@@ -21,21 +21,24 @@
 import { ref } from 'vue';
 import formularioEstadio from '../components/formularioEstadio.vue';
 import Estadio from '../components/estadio.vue';
-import type { Setor } from '../interfaces/setor';
-import type { EstadioPayload } from '../interfaces/estadio';
+import type { setorInterface } from '../interfaces/setorInterface.js';
+import type { EstadioInterface } from '../interfaces/estadioInterface.js';
+import { salvarEstadio } from '../../services/estadios/salvarEstadio'
+import { Console } from 'console';
+
 
 const nomeEstadio = ref('')
 const cidade = ref('')
-const setores = ref<Setor[]>([])
+const setores = ref<setorInterface[]>([])
 
-const LETRA_SETOR: Record<Setor['posicao'], Setor['letra']> = {
+const LETRA_SETOR: Record<setorInterface['posicao'], 'c' | 'b' | 'e' | 'd'> = {
   cima: 'c',
   baixo: 'b',
   esquerda: 'e',
   direita: 'd',
 }
 
-function criarSetor(novoSetor: Omit<Setor, 'letra'>) {
+function criarSetor(novoSetor: Omit<setorInterface, 'letra'>) {
 
   if (setores.value.find(setor => setor.posicao === novoSetor.posicao)) {
     return;
@@ -48,20 +51,21 @@ function criarSetor(novoSetor: Omit<Setor, 'letra'>) {
 
 }
 
-function removerSetor(posicao: Setor['posicao']) {
+function removerSetor(posicao: setorInterface['posicao']) {
   setores.value = setores.value.filter(setor => setor.posicao !== posicao)
 }
 
-function montarPayloadEstadio(): EstadioPayload {
+function montarPayloadEstadio(): EstadioInterface {
   return {
-    nome: nomeEstadio.value,
+    desc_estadio: nomeEstadio.value,
     cidade: cidade.value,
     setores: setores.value
   }
 }
 
-function salvarEstadio() {
-  console.log(montarPayloadEstadio())
+async function gravarEstadio() {
+  const retorno = await salvarEstadio(montarPayloadEstadio())
+  alert('Salvou correto')
 }
 
 </script>

@@ -28,22 +28,22 @@
         <div class="text-h6">Setores criados</div>
 
         <div v-for="setor in setores" :key="setor.posicao" class="row items-center justify-between">
-          <span>{{ setor.descricao }} ({{ setor.posicao }})</span>
+          <span>{{ setor.desc_setor }} ({{ setor.posicao }})</span>
           <q-btn dense flat icon="delete" color="negative" @click="$emit('remover-setor', setor.posicao)" />
         </div>
+      </q-card-section>
               <q-separator />
               <q-btn class="q-mt-sm" color="primary" @click="$emit('salvar-estadio')">Salvar estadio</q-btn>
-      </q-card-section>
     </q-card-section>
   </q-card>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { Setor } from '../interfaces/setor';
+import type { setorInterface,SetorCriacaoInterface } from '../interfaces/setorInterface';
 
 defineProps<{
-  setores: Setor[]
+  setores: setorInterface[]
   nomeEstadio: string
   cidade: string
 }>()
@@ -51,14 +51,14 @@ defineProps<{
 const emit = defineEmits<{
   'update:nomeEstadio': [value: string]
   'update:cidade': [value: string]
-  'criar-setor': [setor: Omit<Setor, 'letra'>]
-  'remover-setor': [posicao: Setor['posicao']]
+  'criar-setor': [setor: SetorCriacaoInterface]
+  'remover-setor': [posicao: setorInterface['posicao']]
   'salvar-estadio': []
 }>()
 
 const fileiras = ref(4)
 const assentos = ref(10)
-const posicaoSetor = ref<Setor['posicao']>('cima')
+const posicaoSetor = ref<setorInterface['posicao']>('cima')
 const descricaoSetor = ref('')
 
 const opcoesSetor = [
@@ -70,7 +70,7 @@ const opcoesSetor = [
 
 function handleCriarSetor() {
   emit('criar-setor', {
-    descricao: descricaoSetor.value,
+    desc_setor: descricaoSetor.value,
     posicao: posicaoSetor.value,
     fileiras: fileiras.value,
     assentos: assentos.value

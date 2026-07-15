@@ -5,11 +5,9 @@ export namespace estadioController {
 
   export async function salvarEstadio(req: Request, res: Response) {
     try {
-      const dados = req.body.estadio
-
-      const estadioCriado = await gravarEstadio(dados)
       
-
+      const dados = req.body.estadio
+      const estadioCriado = await gravarEstadio(dados)
       res.status(201).json(estadioCriado)
 
     } catch (error) {

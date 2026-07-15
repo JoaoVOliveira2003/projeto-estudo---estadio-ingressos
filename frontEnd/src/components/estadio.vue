@@ -18,7 +18,7 @@
         <!-- Zoom pequeno -->
         <template v-if="zoom < 1.5">
           <div class="nome-setor">
-            {{ setor.descricao }}
+            {{ setor.desc_setor }}
           </div>
         </template>
 
@@ -47,10 +47,10 @@
 import 'src/css/estadio.scss'
 
 import { ref } from 'vue';
-import type { Setor } from '../interfaces/setor';
+import type { setorInterface } from '../interfaces/setorInterface';
 
 defineProps<{
-  setores: Setor[]
+  setores: setorInterface[]
   nomeEstadio: string
   cidade: string
 }>()
@@ -85,7 +85,7 @@ function limitarOffset() {
 
 }
 
-function idAssento(setor: Setor, indexFileira: number, indexAssento: number): string {
+function idAssento(setor: setorInterface, indexFileira: number, indexAssento: number): string {
   const fileira = indexFileira + 1
   const posicao = indexAssento + 1
   return `${setor.letra}${fileira}${posicao}`
