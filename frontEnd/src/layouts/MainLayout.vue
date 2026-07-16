@@ -29,6 +29,16 @@
             Criador de estadio.
           </q-item-section>
         </q-item>
+        <q-item clickable v-ripple to="criadorDeEvento">
+          <q-item-section avatar>
+            <q-icon name="people" />
+          </q-item-section>
+          <q-item-section>
+            Criador de evento 
+          </q-item-section>
+        </q-item>
+
+
 
 
       </q-list>
@@ -51,7 +61,7 @@ const drawer = ref(false)
   position: fixed;
   top: 8px;
   right: 8px;
-  z-index: 3000; /* acima do drawer pra sempre ficar clicável */
+  z-index: 3000;
   background: white;
 }
 </style>

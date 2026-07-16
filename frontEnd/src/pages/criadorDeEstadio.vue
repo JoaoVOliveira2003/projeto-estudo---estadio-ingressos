@@ -26,7 +26,6 @@ import type { EstadioInterface } from '../interfaces/estadioInterface.js';
 import { salvarEstadio } from '../../services/estadios/salvarEstadio'
 import { Console } from 'console';
 
-
 const nomeEstadio = ref('')
 const cidade = ref('')
 const setores = ref<setorInterface[]>([])
