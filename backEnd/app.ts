@@ -2,7 +2,10 @@ import express from "express";
 import cors from "cors";
 
 import { routerEstadio } from "./routes/estadio";
+import { routerEvento } from "./routes/evento";
+
 import { EstadioSchema } from "./schema/estadio-schema";
+import { eventoSchema } from "./schema/evento-schema";
 
 import cookieParser from 'cookie-parser';
 import "dotenv/config";
@@ -16,7 +19,7 @@ app.use(cors({
 }));
 app.use(express.json());
 
-const db = {  EstadioSchema};
+const db = {  EstadioSchema,eventoSchema};
 
 (Object.values(db) as any).forEach((schema: any) => {
   if (schema.associate) {
@@ -25,5 +28,6 @@ const db = {  EstadioSchema};
 });
 
 app.use("/estadio", routerEstadio);
+app.use("/evento", routerEvento);
 
 export default app;

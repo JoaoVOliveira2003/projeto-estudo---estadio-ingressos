@@ -24,7 +24,6 @@ import Estadio from '../components/estadio.vue';
 import type { setorInterface } from '../interfaces/setorInterface.js';
 import type { EstadioInterface } from '../interfaces/estadioInterface.js';
 import { salvarEstadio } from '../../services/estadios/salvarEstadio'
-import { Console } from 'console';
 
 const nomeEstadio = ref('')
 const cidade = ref('')
