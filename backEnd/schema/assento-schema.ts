@@ -1,6 +1,8 @@
 import { DataTypes } from 'sequelize'
 import { conecta } from '../config/conecta'
 import { assentoInterface } from '../interfaces/assentoInterface'
+import { setorSchema } from "./setor-schema";
+
 
 export const assentoSchema = conecta.define(
   'assento',
@@ -29,6 +31,7 @@ export const assentoSchema = conecta.define(
     timestamps: false
   }
 )
+
 
 export class assentoQuery {
   schema() {
