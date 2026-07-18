@@ -1,4 +1,3 @@
-import type { EstadioInterface } from '../../src/interfaces/estadioInterface';
 import api from '../../src/utils/apiConector';
 
 export async function getEstadios() {
@@ -6,6 +5,6 @@ export async function getEstadios() {
     const res = await api.get('/estadio/');
     return res.data;
   } catch (error) {
-    console.error('Erro ao criar usuário:', error);
+    console.error('Erro ao criar estadio:', error);
   }
 }

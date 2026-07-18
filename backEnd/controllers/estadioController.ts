@@ -16,6 +16,7 @@ export namespace estadioController {
 
   export async function getTodosEstadios(req: Request, res: Response) {
     try {
+      console.log('entrou no controller')
       const estadios = await getEstadio();
       res.status(201).json(estadios);
     } catch (error) {

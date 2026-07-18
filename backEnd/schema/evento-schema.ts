@@ -45,23 +45,13 @@ export class eventoQuery {
 
   async salvarEvento(evento: eventoInterface) {
     try {
-      const {
-        cod_estadio,
-        desc_evento,
-        descricao,
-        data_evento,
-        maioridade_obrigatoria
-      } = evento
-
-      return await eventoSchema.create({
-        cod_estadio,
-        desc_evento,
-        descricao,
-        data_evento,
-        maioridade_obrigatoria
-      })
+      return await eventoSchema.create(evento as any)   
     } catch (error) {
       throw error
     }
+  }
+
+  async getTodosEventos(){
+    return await eventoSchema.findAll()
   }
 }

@@ -3,28 +3,22 @@
     <q-card>
       <q-card-section>
         <div class="text-h6">
-          Cadastro de evento(nao terminada)
+          Cadastro de evento
         </div>
       </q-card-section>
       <hr>
       <q-card-section>
         <q-input v-model="desc_evento" label="Titulo" outlined class="q-mb-md" />
         <q-input v-model="descricao" label="Descricao" outlined class="q-mb-md" />
-
-
-        <q-select v-model="cod_estadio" :options="estadios" option-label="desc_estadio" options-value="cod_estadio"
-          emit-value map-options label="Escolha o estadio" outlined class="q-mb-md" />
-
-
+        <q-select v-model="cod_estadio" :options="estadios" option-label="desc_estadio" option-value="cod_estadio"
+        emit-value map-options label="Escolha o estadio" outlined class="q-mb-md" />
         <q-input v-model="data_evento" label="Data evento" outlined class="q-mb-md" type="datetime-local" />
         <q-select v-model="maioridade_obrigatoria" :options="opcoesMaioridade" option-label="label"
-          options-value="value" emit-value map-options label="Maioridade nescessaria" outlined class="q-mb-md" />
-
+        option-value="value" emit-value map-options label="Maioridade nescessaria" outlined class="q-mb-md" />
         <q-btn label="Salvar" color="primary" @click="chamarSalvarEvento" /> </q-card-section>
     </q-card>
   </q-page>
 </template>
-
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { getEstadios } from '../../services/estadios/getTodosEstadios'
@@ -62,12 +56,7 @@ async function chamarSalvarEvento() {
     data_evento: data_evento.value,
     maioridade_obrigatoria: maioridade_obrigatoria.value
   }
-
   const retorno = await salvarEvento(evento)
-  alert('salvou correto')
-
+  alert('salvou correto' + retorno)
 }
-
-
-
 </script>

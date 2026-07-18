@@ -9,6 +9,8 @@
     "rootDir": "./",
     "allowImportingTsExtensions": true,
     "noEmit": true,
+    "sourceMap": true,
+    "inlineSources": true
   },
   "ts-node": {
     "esm": true,

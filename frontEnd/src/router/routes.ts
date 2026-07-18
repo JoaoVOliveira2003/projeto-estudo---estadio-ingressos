@@ -13,9 +13,18 @@ const routes: RouteRecordRaw[] = [
         path: '/criadorDeEstadio',
         component: () => import('pages/criadorDeEstadio.vue'),
       },
-       {
+      {
         path: '/criadorDeEvento',
         component: () => import('pages/criadorDeEvento.vue'),
+      },
+      {
+        path: '/listaDeEventos',
+        component: () => import('pages/listaDeEventos.vue'),
+      },
+      {
+        path: '/evento/:cod_evento',
+        name: 'evento',
+        component: () => import('pages/evento.vue'),
       },
     ],
   },

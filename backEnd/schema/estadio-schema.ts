@@ -33,8 +33,7 @@ export class EstadioQuery {
 
   async salvarEstadio(estadio: EstadioInterface) {
     try {
-      const { desc_estadio, cidade } = estadio
-      return await EstadioSchema.create({ desc_estadio, cidade })
+      return await EstadioSchema.create(estadio as any)
     } catch (error) {
       throw error
     }
