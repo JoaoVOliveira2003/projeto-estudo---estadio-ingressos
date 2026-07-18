@@ -28,7 +28,6 @@ import { salvarEstadio } from '../../services/estadios/salvarEstadio'
 const nomeEstadio = ref('')
 const cidade = ref('')
 const setores = ref<setorInterface[]>([])
-
 const LETRA_SETOR: Record<setorInterface['posicao'], 'c' | 'b' | 'e' | 'd'> = {
   cima: 'c',
   baixo: 'b',

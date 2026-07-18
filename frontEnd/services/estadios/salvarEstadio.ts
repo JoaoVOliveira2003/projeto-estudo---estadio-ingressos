@@ -1,5 +1,5 @@
 import type { EstadioInterface } from '../../src/interfaces/estadioInterface';
-import api from '../../src/utils/apiConector';
+import api from '../../utils/validacao/apiConector';
 
 export async function salvarEstadio(estadio: EstadioInterface) {
   try {

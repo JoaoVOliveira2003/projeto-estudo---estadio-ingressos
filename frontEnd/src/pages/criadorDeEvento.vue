@@ -8,13 +8,13 @@
       </q-card-section>
       <hr>
       <q-card-section>
-        <q-input v-model="desc_evento" label="Titulo" outlined class="q-mb-md" />
-        <q-input v-model="descricao" label="Descricao" outlined class="q-mb-md" />
+        <q-input v-model="desc_evento" label="Titulo" outlined class="q-mb-md" :rules="regras.evento.titulo" hide-bottom-space/>
+        <q-input v-model="descricao" label="Descricao" outlined class="q-mb-md" :rules="regras.evento.descricao" hide-bottom-space/>
         <q-select v-model="cod_estadio" :options="estadios" option-label="desc_estadio" option-value="cod_estadio"
-        emit-value map-options label="Escolha o estadio" outlined class="q-mb-md" />
-        <q-input v-model="data_evento" label="Data evento" outlined class="q-mb-md" type="datetime-local" />
-        <q-select v-model="maioridade_obrigatoria" :options="opcoesMaioridade" option-label="label"
-        option-value="value" emit-value map-options label="Maioridade nescessaria" outlined class="q-mb-md" />
+        emit-value map-options label="Escolha o estadio" outlined class="q-mb-md" :rules="regras.evento.cod_estadio" hide-bottom-space/>
+        <q-input v-model="data_evento" label="Data evento" outlined class="q-mb-md" type="datetime-local"  hide-bottom-space :rules="regras.evento.data_evento"/>
+        <q-select v-model="maioridade_obrigatoria" :options="opcoesMaioridade" option-label="label" hide-bottom-space
+        option-value="value"  emit-value map-options label="Maioridade nescessaria" outlined class="q-mb-md" :rules="regras.evento.maioridade_obrigatoria" />
         <q-btn label="Salvar" color="primary" @click="chamarSalvarEvento" /> </q-card-section>
     </q-card>
   </q-page>
@@ -25,6 +25,7 @@ import { getEstadios } from '../../services/estadios/getTodosEstadios'
 import type { eventoInterface } from 'src/interfaces/eventoInterface';
 import type { EstadioInterface } from 'src/interfaces/estadioInterface';
 import { salvarEvento } from '../../services/eventos/salvarEvento'
+import { regras } from '../../utils/validacao/regras'
 
 const opcoesMaioridade = [
   {

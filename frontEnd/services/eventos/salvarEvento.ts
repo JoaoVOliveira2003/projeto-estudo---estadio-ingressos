@@ -1,5 +1,5 @@
 import type {eventoInterface  } from '../../src/interfaces/eventoInterface';
-import api from '../../src/utils/apiConector';
+import api from '../../utils/validacao/apiConector';
 
 export async function salvarEvento(evento: eventoInterface) {
   try {

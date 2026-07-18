@@ -1,4 +1,4 @@
-import api from '../../src/utils/apiConector';
+import api from '../../utils/validacao/apiConector';
 
 export async function getTodosEventos(){
   try{

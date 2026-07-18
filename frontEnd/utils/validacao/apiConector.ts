@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getRouter } from '../router/index'
+import { getRouter } from '../../src/router/index'
 
 const api = axios.create({
   baseURL: 'http://localhost:3000',
