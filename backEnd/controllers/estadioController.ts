@@ -37,16 +37,4 @@ export namespace estadioController {
     }
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
 }

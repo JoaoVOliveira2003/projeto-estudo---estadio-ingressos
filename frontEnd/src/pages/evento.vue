@@ -1,37 +1,38 @@
 <template>
   <q-page class="row" style="height: 100vh">
     <div class="col-12" style="height: 100%">
-      <Estadio :setores="setores" :nome-estadio="nomeEstadio" :cidade="cidade" />
+      <Estadio
+       :setores="setores"
+       :nome-estadio="nomeEstadio"
+       :cidade="cidade" />
     </div>
   </q-page>
 </template>
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { carregarDadosEstadio } from '../../services/estadios/getDadosEstadio'
+import { carregarDadosEvento } from '../../services/eventos/getTodosDadosEvento'
 import type { setorInterface } from '../interfaces/setorInterface.js';
 import type { EstadioInterface } from '../interfaces/estadioInterface.js';
-
 import Estadio from '../components/estadio.vue';
 
-const setores = ref<setorInterface[]>([])
+const nomeEstadio = ref('')
+const cidade = ref('')
+const evento = ref('')
+const estadio = ref('')
+const assentos = ref('')
+let setores = ref<setorInterface[]>([])
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 
 onMounted(async () =>{
   const codEvento = Number(route.params.cod_evento)
-  Estadio.value = await carregarDadosEstadio(codEvento)
+  evento.value = await carregarDadosEvento(codEvento)
+  estadio.value = evento.value.evento_estadio;
+  setores.value = evento.value.evento_estadio.setores
+  assentos.value = evento.value.evento_estadio.setores.assentos
 })
 
-const nomeEstadio = ref('')
-const cidade = ref('')
 
-function montarPayloadEstadio(): EstadioInterface {
-  return {
-    desc_estadio: nomeEstadio.value,
-    cidade: cidade.value,
-    setores: setores.value
-  }
-}
 
 </script>

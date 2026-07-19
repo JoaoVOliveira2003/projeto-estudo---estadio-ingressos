@@ -33,8 +33,6 @@ export const setorSchema = conecta.define(
   }
 )
 
-
-
 export class setorQuery {
   schema() {
     return setorSchema

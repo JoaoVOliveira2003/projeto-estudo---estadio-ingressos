@@ -7,7 +7,7 @@
     "test": "jest --verbose",
     "test:unit": "jest tests/unitario --verbose",
     "test:integration": "jest tests/integracao --verbose",
-    "dev": "node --inspect --import tsx server.ts",
+    "dev": "node --inspect --import tsx --watch server.ts",
     "banco": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
   },
   "keywords": [],
