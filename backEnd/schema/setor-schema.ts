@@ -1,9 +1,6 @@
 import { DataTypes } from 'sequelize'
 import { conecta } from '../config/conecta'
 import { setorInterface } from '../interfaces/setorInterface'
-import { EstadioSchema } from "./estadio-schema";
-import { assentoSchema } from "./assento-schema";
-
 
 export const setorSchema = conecta.define(
   'setor',
@@ -26,6 +23,14 @@ export const setorSchema = conecta.define(
       type: DataTypes.STRING(255),
       allowNull: false
     },
+    fileiras: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    assentos: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
   },
   {
     tableName: 'setor',
@@ -38,12 +43,11 @@ export class setorQuery {
     return setorSchema
   }
 
-async salvarSetores(setores: setorInterface[]) {
+  async salvarSetores(setores: setorInterface[]) {
     try {
-      const setoresParaCriar = setores.map(setor => {
-        const { cod_estadio, desc_setor,  posicao } = setor
-        return { cod_estadio, desc_setor, posicao }
-      })
+      const setoresParaCriar = setores.map(setor => ({
+        ...setor
+      }))
 
       return await setorSchema.bulkCreate(setoresParaCriar)
     } catch (error) {

@@ -13,14 +13,15 @@
           Navegação
         </q-item-label>
 
-        <q-item clickable v-ripple to="/">
+        <!-- <q-item clickable v-ripple to="/">
           <q-item-section avatar>
             <q-icon name="people" />
           </q-item-section>
           <q-item-section>
             Quadrados vermelhos fundo preto
           </q-item-section>
-        </q-item>
+        </q-item> -->
+
         <q-item clickable v-ripple to="criadorDeEstadio">
           <q-item-section avatar>
             <q-icon name="people" />

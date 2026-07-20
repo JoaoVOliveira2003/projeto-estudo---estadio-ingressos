@@ -14,7 +14,7 @@
     <div class="estadio" :style="{
       transform: `translate3d(${offsetX}px, ${offsetY}px, 0) scale(${zoom})`
     }">
-      <div v-for="setor in setores" :key="setor.posicao" :class="['setor', setor.posicao]">
+      <div v-for="setor in setores" :key="setor.cod_setor" :class="['setor', setor.posicao]">
         <!-- Zoom pequeno -->
         <template v-if="zoom < 1.5">
           <div class="nome-setor">
@@ -29,9 +29,10 @@
 
         <!-- Zoom grande -->
         <template v-else>
-          <div v-for="(linha, indexFileira) in setor.fileiras" :key="indexFileira" class="fileira-cadeiras">
-            <div v-for="(cadeira, indexAssento) in setor.assentos" :key="indexAssento" class="cadeira"
-              @click="clicarAssento(idAssento(setor, indexFileira, indexAssento))" />
+          <div v-for="(assentosFileira, fileira) in fileirasPorSetor[setor.cod_setor]" :key="fileira"
+            class="fileira-cadeiras">
+            <div class="cadeira" v-for="assento in assentosFileira" :key="assento.cod_assento"
+              @click="clicarAssento(setor, assento)"></div>
           </div>
         </template>
       </div>
@@ -41,19 +42,54 @@
       </div>
     </div>
   </div>
+
+      <ModalCompraIngresso
+      v-model="modalAberto"
+      :setor="setorSelecionado"
+      :assento="assentoSelecionado"
+    />
+
+
 </template>
 
 <script setup lang="ts">
+
 import 'src/css/estadio.scss'
 
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import type { setorInterface } from '../interfaces/setorInterface';
+import type { assentoInterface } from '../interfaces/assentoInterface';
+import ModalCompraIngresso from './modalCompra.vue'
 
-defineProps<{
+const modalAberto = ref(false)
+const setorSelecionado = ref<setorInterface | null>(null)
+const assentoSelecionado = ref<assentoInterface | null>(null)
+
+
+
+
+
+const props = defineProps<{
   setores: setorInterface[]
   nomeEstadio: string
   cidade: string
 }>()
+
+const fileirasPorSetor = computed(() => {
+  const mapa: Record<number, Record<string, assentoInterface[]>> = {}
+  for (const setor of props.setores) {
+    mapa[setor.cod_setor] = agruparPorFileira(setor.assentos_setor)
+  }
+  return mapa
+})
+
+function agruparPorFileira(assentos: assentoInterface[]): Record<string, assentoInterface[]> {
+  return assentos.reduce((acc, assento) => {
+    if (!acc[assento.fila]) acc[assento.fila] = []
+    acc[assento.fila].push(assento)
+    return acc
+  }, {} as Record<string, assentoInterface[]>)
+}
 
 const zoom = ref(1)
 const ZOOM_MIN = 0.5
@@ -91,8 +127,10 @@ function idAssento(setor: setorInterface, indexFileira: number, indexAssento: nu
   return `${setor.letra}${fileira}${posicao}`
 }
 
-function clicarAssento(id: string) {
-  console.log('Assento clicado:', id)
+function clicarAssento(setor: setorInterface, assento: assentoInterface) {
+  setorSelecionado.value = setor
+  assentoSelecionado.value = assento
+  modalAberto.value = true
 }
 
 function zoomMouse(event: WheelEvent) {
@@ -139,8 +177,6 @@ function drag(event: MouseEvent) {
 }
 
 function pararDrag() {
-
   arrastando.value = false
-
 }
 </script>

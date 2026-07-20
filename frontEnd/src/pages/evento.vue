@@ -13,24 +13,32 @@ import { onMounted, ref } from 'vue';
 import { carregarDadosEvento } from '../../services/eventos/getTodosDadosEvento'
 import type { setorInterface } from '../interfaces/setorInterface.js';
 import type { EstadioInterface } from '../interfaces/estadioInterface.js';
+import type { eventoInterface } from '../interfaces/eventoInterface';
+
 import Estadio from '../components/estadio.vue';
 
-const nomeEstadio = ref('')
-const cidade = ref('')
-const evento = ref('')
-const estadio = ref('')
-const assentos = ref('')
-let setores = ref<setorInterface[]>([])
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 
-onMounted(async () =>{
+const evento = ref<eventoInterface | null>(null)
+const estadio = ref<EstadioInterface | null>(null)
+const nomeEstadio = ref('')
+const cidade = ref('')
+const setores = ref<setorInterface[]>([])
+
+onMounted(async () => {
   const codEvento = Number(route.params.cod_evento)
+
   evento.value = await carregarDadosEvento(codEvento)
-  estadio.value = evento.value.evento_estadio;
-  setores.value = evento.value.evento_estadio.setores
-  assentos.value = evento.value.evento_estadio.setores.assentos
+
+  if (!evento.value) return
+
+  estadio.value = evento.value.evento_estadio
+  nomeEstadio.value = estadio.value.desc_estadio
+  cidade.value = estadio.value.cidade
+  setores.value = estadio.value.setores ?? []
+  console.log(setores.value)
 })
 
 

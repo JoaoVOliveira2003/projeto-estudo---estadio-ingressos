@@ -74,7 +74,7 @@ export class eventoQuery {
               include: [
                 {
                   model: assentoSchema,
-                  as: "assentos",
+                  as: "assentos_setor",
                 },
               ],
             },

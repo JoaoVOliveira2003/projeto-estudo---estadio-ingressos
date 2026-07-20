@@ -1,0 +1,3 @@
+amanha começar a fazer coisas com "API - Mercado Pago"
+
+https://www.mercadopago.com.br/developers/pt/docs/qr-code/overview

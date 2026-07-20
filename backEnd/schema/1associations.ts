@@ -16,7 +16,7 @@ setorSchema.belongsTo(EstadioSchema, {
 
 setorSchema.hasMany(assentoSchema, {
   foreignKey: "cod_setor",
-  as: "assentos",
+  as: "assentos_setor",
 });
 
 assentoSchema.belongsTo(setorSchema, {

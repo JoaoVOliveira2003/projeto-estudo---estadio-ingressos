@@ -58,7 +58,7 @@ export class EstadioQuery {
           include: [
             {
               model: assentoSchema,
-              as: "assentos",
+              as: "assentos_setor",
             },
           ],
         },
