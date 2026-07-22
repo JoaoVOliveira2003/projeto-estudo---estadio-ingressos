@@ -48,6 +48,7 @@ function criarSetor(novoSetor: Omit<setorInterface, 'letra'>) {
 
 }
 
+
 function removerSetor(posicao: setorInterface['posicao']) {
   setores.value = setores.value.filter(setor => setor.posicao !== posicao)
 }

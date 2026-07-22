@@ -67,7 +67,6 @@ function obterAssentos(setor: Setor): Assento[] {
   return cacheAssentos.get(setor.id)!
 }
 
-//zoom
 
 const zoom = ref(1)
 

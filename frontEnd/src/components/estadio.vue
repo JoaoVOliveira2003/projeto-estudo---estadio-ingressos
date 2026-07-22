@@ -14,7 +14,7 @@
     <div class="estadio" :style="{
       transform: `translate3d(${offsetX}px, ${offsetY}px, 0) scale(${zoom})`
     }">
-      <div v-for="setor in setores" :key="setor.cod_setor" :class="['setor', setor.posicao]">
+      <div v-for="setor in setores" :key="setor.cod_setor ?? setor.posicao" :class="['setor', setor.posicao]">
         <!-- Zoom pequeno -->
         <template v-if="zoom < 1.5">
           <div class="nome-setor">
@@ -29,7 +29,7 @@
 
         <!-- Zoom grande -->
         <template v-else>
-          <div v-for="(assentosFileira, fileira) in fileirasPorSetor[setor.cod_setor]" :key="fileira"
+          <div v-for="(assentosFileira, fileira) in fileirasPorSetor[setor.cod_setor ?? setor.posicao]" :key="fileira"
             class="fileira-cadeiras">
             <div class="cadeira" v-for="assento in assentosFileira" :key="assento.cod_assento"
               @click="clicarAssento(setor, assento)"></div>
@@ -43,13 +43,6 @@
     </div>
   </div>
 
-      <ModalCompraIngresso
-      v-model="modalAberto"
-      :setor="setorSelecionado"
-      :assento="assentoSelecionado"
-    />
-
-
 </template>
 
 <script setup lang="ts">
@@ -59,15 +52,6 @@ import 'src/css/estadio.scss'
 import { ref, computed } from 'vue';
 import type { setorInterface } from '../interfaces/setorInterface';
 import type { assentoInterface } from '../interfaces/assentoInterface';
-import ModalCompraIngresso from './modalCompra.vue'
-
-const modalAberto = ref(false)
-const setorSelecionado = ref<setorInterface | null>(null)
-const assentoSelecionado = ref<assentoInterface | null>(null)
-
-
-
-
 
 const props = defineProps<{
   setores: setorInterface[]
@@ -76,12 +60,41 @@ const props = defineProps<{
 }>()
 
 const fileirasPorSetor = computed(() => {
-  const mapa: Record<number, Record<string, assentoInterface[]>> = {}
+  const mapa: Record<string | number, Record<string, assentoInterface[]>> = {}
+
   for (const setor of props.setores) {
-    mapa[setor.cod_setor] = agruparPorFileira(setor.assentos_setor)
+    const chave = setor.cod_setor ?? setor.posicao
+
+    if (setor.assentos_setor?.length) {
+      mapa[chave] = agruparPorFileira(setor.assentos_setor)
+    } else {
+      mapa[chave] = gerarAssentosTemporarios(setor)
+    }
   }
+
   return mapa
 })
+
+function gerarAssentosTemporarios(setor: setorInterface): Record<string, assentoInterface[]> {
+  const resultado: Record<string, assentoInterface[]> = {}
+
+  for (let fila = 1; fila <= setor.fileiras!; fila++) {
+    const numeroFila = String(fila)
+
+    resultado[numeroFila] = []
+
+    // for (let cadeira = 1; cadeira <= setor.assentos; cadeira++) {
+    for (let cadeira = 1; cadeira <= setor.assentos!.length; cadeira++) {
+
+      resultado[numeroFila].push({
+        cod_assento: cadeira,
+        fila: numeroFila
+      } as assentoInterface)
+    }
+  }
+
+  return resultado
+}
 
 function agruparPorFileira(assentos: assentoInterface[]): Record<string, assentoInterface[]> {
   return assentos.reduce((acc, assento) => {
@@ -89,6 +102,14 @@ function agruparPorFileira(assentos: assentoInterface[]): Record<string, assento
     acc[assento.fila].push(assento)
     return acc
   }, {} as Record<string, assentoInterface[]>)
+}
+
+const emit = defineEmits<{
+  (e: 'selecionar-assento', setor: setorInterface, assento: assentoInterface): void
+}>()
+
+function clicarAssento(setor: setorInterface, assento: assentoInterface) {
+  emit('selecionar-assento', setor, assento)
 }
 
 const zoom = ref(1)
@@ -118,19 +139,6 @@ function limitarOffset() {
 
   offsetX.value = Math.min(Math.max(offsetX.value, -maxOffsetX), maxOffsetX)
   offsetY.value = Math.min(Math.max(offsetY.value, -maxOffsetY), maxOffsetY)
-
-}
-
-function idAssento(setor: setorInterface, indexFileira: number, indexAssento: number): string {
-  const fileira = indexFileira + 1
-  const posicao = indexAssento + 1
-  return `${setor.letra}${fileira}${posicao}`
-}
-
-function clicarAssento(setor: setorInterface, assento: assentoInterface) {
-  setorSelecionado.value = setor
-  assentoSelecionado.value = assento
-  modalAberto.value = true
 }
 
 function zoomMouse(event: WheelEvent) {
