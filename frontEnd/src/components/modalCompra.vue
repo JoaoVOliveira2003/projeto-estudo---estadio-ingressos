@@ -1,73 +1,47 @@
 <template>
   <q-dialog :model-value="modelValue" @update:model-value="fechar" persistent>
-    <q-card style="width: 400px; max-width: 90vw;">
-      <q-card-section class="row items-center q-pb-none">
+    <q-card style="width: 750px; max-width: 95vw;">
+      <q-card-section class="row items-center">
         <div class="text-h6">
           {{ etapa === 'dados' ? 'Confirme seus dados' : 'Ingresso gerado!' }}
         </div>
         <q-space />
         <q-btn icon="close" flat round dense @click="fechar" />
       </q-card-section>
-
+      <q-separator />
       <q-card-section>
-        <q-banner dense class="bg-grey-2 text-grey-9 q-mb-md">
-          Setor <strong>{{ setor?.desc_setor }}</strong> —
-          Fileira <strong>{{ assento?.fila }}</strong> —
-          Assento <strong>{{ assento?.desc_assento }}</strong>
+        <q-banner dense rounded class="bg-grey-2 text-grey-9 text-center q-mb-lg">
+          <strong>{{ setor?.desc_setor }}</strong>
+          • Fileira <strong>{{ assento?.fila }}</strong>
+          • Assento <strong>{{ assento?.desc_assento }}</strong>
         </q-banner>
-<br>
-        <!-- Tela 1: dados do comprador -->
-        <q-form v-if="etapa === 'dados'" @submit.prevent="avancar" class="q-gutter-md">
-          <q-input
-            v-model="form.nome"
-            label="Nome completo"
-            filled
-            dense
-            required
-          />
 
-          <q-input
-            v-model="form.cpf"
-            label="CPF"
-            filled
-            dense
-            mask="###.###.###-##"
-            required
-          />
-
-          <q-input
-            v-model="form.dataNascimento"
-            label="Data de nascimento"
-            type="date"
-            filled
-            dense
-            required
-          />
-
-          <q-btn
-            type="submit"
-            label="Continuar"
-            color="primary"
-            class="full-width"
-            unelevated
-          />
-        </q-form>
-
-        <!-- Tela 2: QR Code -->
-        <div v-else-if="etapa === 'qrcode'" class="column items-center q-gutter-md">
-          <q-img :src="qrCodeUrl" width="220px" ratio="1" />
-
-          <div class="text-caption text-grey-7">
-            {{ form.nome }} — CPF {{ form.cpf }}
+        <q-form v-if="etapa === 'dados'" @submit.prevent="avancar">
+          <div class="row q-col-gutter-md">
+            <div class="col-12 col-md-4">
+              <q-input v-model="form.nome" label="Nome completo" filled dense required />
+            </div>
+            <div class="col-12 col-md-4">
+              <q-input v-model="form.cpf" label="CPF" filled dense mask="###.###.###-##" required />
+            </div>
+            <div class="col-12 col-md-4">
+              <q-input v-model="form.dataNascimento" label="Data de nascimento" type="date" filled dense required />
+            </div>
           </div>
-
-          <q-btn
-            label="Fechar"
-            color="primary"
-            class="full-width"
-            unelevated
-            @click="fechar"
-          />
+          <div class="row justify-end q-mt-xl">
+            <q-btn type="submit" label="Continuar" color="primary" unelevated style="min-width: 180px;" />
+          </div>
+        </q-form>
+        <!-- Etapa 2 -->
+        <div v-else-if="etapa === 'qrcode'" class="column items-center">
+          <q-img :src="qrCodeUrl" width="240px" ratio="1" class="q-mb-md" />
+          <div class="text-subtitle1 text-center">
+            <strong>{{ form.nome }}</strong>
+          </div>
+          <div class="text-grey-7 q-mb-lg">
+            CPF {{ form.cpf }}
+          </div>
+          <q-btn label="Fechar" color="primary" unelevated style="min-width: 180px;" @click="fechar" />
         </div>
       </q-card-section>
     </q-card>
