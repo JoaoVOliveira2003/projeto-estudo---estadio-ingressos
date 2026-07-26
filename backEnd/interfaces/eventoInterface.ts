@@ -4,5 +4,6 @@ export interface eventoInterface{
   desc_evento:string
   descricao:string
   data_evento:Date
+  preco:number
   maioridade_obrigatoria:boolean
 } 

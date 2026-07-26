@@ -30,6 +30,10 @@ export const eventoSchema = conecta.define(
       type: DataTypes.DATE,
       allowNull: false,
     },
+    preco:{
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     maioridade_obrigatoria: {
       type: DataTypes.BOOLEAN,
       allowNull: false,

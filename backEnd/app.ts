@@ -7,6 +7,7 @@ import "./schema/1associations";
 
 import { routerEstadio } from "./routes/estadio";
 import { routerEvento } from "./routes/evento";
+import { mercadoPagoRouter } from "./routes/mercadoPago";
 
 const app = express();
 
@@ -23,5 +24,6 @@ app.use(express.json());
 
 app.use("/estadio", routerEstadio);
 app.use("/evento", routerEvento);
+app.use("/mercadoPago", mercadoPagoRouter);
 
 export default app;

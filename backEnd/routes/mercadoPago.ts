@@ -1,10 +1,9 @@
-import {Router} from "express";
-import { mpClient } from '../controllers/mercadopagoController';
+import { Router } from 'express';
+import { pagamentoController } from '../controllers/mercadopagoController';
 
-export const routerEvento = Router();
+export const mercadoPagoRouter = Router();
 
+mercadoPagoRouter.post('/criar-preferencia', pagamentoController.criarPreferencia);
+mercadoPagoRouter.post('/webhook', pagamentoController.webhook);
 
-const { data } = await api.post('/pagamentos/criar-preferencia');
-const preferenceId = data.preferenceId;
-
-export default routerEvento
+export default mercadoPagoRouter
