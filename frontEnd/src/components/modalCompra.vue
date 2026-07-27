@@ -33,8 +33,8 @@
           </div>
         </q-form>
         <!-- Etapa 2 -->
-        <div v-else-if="etapa === 'qrcode'" class="column items-center">
-          <q-img :src="qrCodeUrl" width="240px" ratio="1" class="q-mb-md" />
+        <div v-else-if="etapa === 'pagamento'" class="column items-center">
+          <!-- <q-img :src="" width="240px" ratio="1" class="q-mb-md" /> -->
           <div class="text-subtitle1 text-center">
             <strong>{{ form.nome }}</strong>
           </div>
@@ -49,7 +49,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import type { setorInterface } from '../interfaces/setorInterface'
 import type { assentoInterface } from '../interfaces/assentoInterface'
 
@@ -59,11 +59,29 @@ const props = defineProps<{
   assento: assentoInterface | null
 }>()
 
+onMounted(async () => {
+    await iniciar()
+})
+
+async function avancar() {
+
+    etapa.value = 'pagamento'
+
+    const { preferenceId } = await criarPreferencia({
+        id: props.assento!.cod_assento.toString(),
+        titulo: props.setor!.desc_setor,
+        quantidade: 1,
+        valorUnitario: 100
+    })
+
+    await abrirWallet(preferenceId)
+}
+
 const emit = defineEmits<{
   'update:modelValue': [value: boolean]
 }>()
 
-type Etapa = 'dados' | 'qrcode'
+type Etapa = 'dados' | 'pagamento'
 
 const etapa = ref<Etapa>('dados')
 
@@ -80,20 +98,20 @@ watch(() => props.modelValue, (aberto) => {
   }
 })
 
-const qrCodeUrl = computed(() => {
-  const conteudo = JSON.stringify({
-    cod_assento: props.assento?.cod_assento,
-    cod_setor: props.setor?.cod_setor,
-    nome: form.value.nome,
-    cpf: form.value.cpf
-  })
+// const pagamentoUrl = computed(() => {
+//   const conteudo = JSON.stringify({
+//     cod_assento: props.assento?.cod_assento,
+//     cod_setor: props.setor?.cod_setor,
+//     nome: form.value.nome,
+//     cpf: form.value.cpf
+//   })
 
-  return `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(conteudo)}`
-})
+//   return `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(conteudo)}`
+// })
 
-function avancar() {
-  etapa.value = 'qrcode'
-}
+// function avancar() {
+//   etapa.value = 'pagamento'
+// }
 
 function fechar() {
   emit('update:modelValue', false)

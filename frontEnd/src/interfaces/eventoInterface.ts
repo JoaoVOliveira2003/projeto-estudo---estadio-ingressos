@@ -8,4 +8,5 @@ export interface eventoInterface {
   data_evento: string
   maioridade_obrigatoria: boolean
   evento_estadio?: EstadioInterface
+  preco:number
 }

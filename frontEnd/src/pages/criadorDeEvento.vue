@@ -9,6 +9,7 @@
       <hr>
       <q-card-section>
         <q-input v-model="desc_evento" label="Titulo" outlined class="q-mb-md" :rules="regras.evento.titulo" hide-bottom-space/>
+        <q-input v-model="preco" label="Preco" outlined class="q-mb-md" :rules="regras.evento.preco" hide-bottom-space/>
         <q-input v-model="descricao" label="Descricao" outlined class="q-mb-md" :rules="regras.evento.descricao" hide-bottom-space/>
         <q-select v-model="cod_estadio" :options="estadios" option-label="desc_estadio" option-value="cod_estadio"
         emit-value map-options label="Escolha o estadio" outlined class="q-mb-md" :rules="regras.evento.cod_estadio" hide-bottom-space/>
@@ -39,6 +40,7 @@ const opcoesMaioridade = [
 ]
 
 const cod_estadio = ref(0)
+const preco = ref(0)
 const desc_evento = ref('')
 const descricao = ref('')
 const data_evento = ref('')
@@ -51,6 +53,7 @@ onMounted(async () => {
 
 async function chamarSalvarEvento() {
   const evento: eventoInterface = {
+    preco:preco.value,
     desc_evento: desc_evento.value,
     descricao: descricao.value,
     cod_estadio: cod_estadio.value,

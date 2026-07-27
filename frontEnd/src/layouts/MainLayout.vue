@@ -46,6 +46,16 @@
             Lista de eventos 
           </q-item-section>
         </q-item>
+        <q-item clickable v-ripple to="/testeMercadoPago">
+          <q-item-section avatar>
+            <q-icon name="people" />
+          </q-item-section>
+          <q-item-section>
+            Mercado pago 
+          </q-item-section>
+        </q-item>
+
+
       </q-list>
     </q-drawer>
     <q-page-container>

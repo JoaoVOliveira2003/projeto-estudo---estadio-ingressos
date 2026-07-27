@@ -26,6 +26,11 @@ const routes: RouteRecordRaw[] = [
         name: 'evento',
         component: () => import('pages/evento.vue'),
       },
+      {
+        path: '/testeMercadoPago',
+        name: 'mercadoPago',
+        component: () => import('pages/paginaDeMercadoPago.vue'),
+      },
     ],
   },
 
