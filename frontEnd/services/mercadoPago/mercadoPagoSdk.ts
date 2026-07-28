@@ -1,5 +1,5 @@
 export function carregarSdkMercadoPago(){
-  return new Promise((resolve, reject) => {
+  return new Promise<void>((resolve, reject) => {
     if (window.MercadoPago) {
       resolve();
       return;

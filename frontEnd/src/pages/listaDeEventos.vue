@@ -54,53 +54,13 @@ onMounted(async () => {
 })
 
 const colunas: QTableColumn<Evento>[] = [
-  {
-    name: 'cod_evento',
-    label: 'Código',
-    field: 'cod_evento',
-    align: 'left',
-    sortable: true
-  },
-  {
-    name: 'cod_estadio',
-    label: 'Estádio',
-    field: 'cod_estadio',
-    align: 'left',
-    sortable: true
-  },
-  {
-    name: 'desc_evento',
-    label: 'Título',
-    field: 'desc_evento',
-    align: 'left',
-    sortable: true
-  },
-  {
-    name: 'descricao',
-    label: 'Descrição',
-    field: 'descricao',
-    align: 'left'
-  },
-  {
-    name: 'data_evento',
-    label: 'Data',
-    field: 'data_evento',
-    align: 'left',
-    sortable: true
-  },
-  {
-    name: 'maioridade_obrigatoria',
-    label: 'Maioridade',
-    field: row => (row.maioridade_obrigatoria ? 'Sim' : 'Não'),
-    align: 'center',
-    sortable: true
-  },
-  {
-    name: 'acoes',
-    label: 'Ações',
-    field: () => '',
-    align: 'center'
-  }
+  { name: 'cod_evento', label: 'Código', field: 'cod_evento', align: 'left', sortable: true },
+  { name: 'cod_estadio', label: 'Estádio', field: 'cod_estadio', align: 'left', sortable: true },
+  { name: 'desc_evento', label: 'Título', field: 'desc_evento', align: 'left', sortable: true },
+  { name: 'descricao', label: 'Descrição', field: 'descricao', align: 'left' },
+  { name: 'data_evento', label: 'Data', field: 'data_evento', align: 'left', sortable: true },
+  { name: 'maioridade_obrigatoria', label: 'Maioridade', field: row => (row.maioridade_obrigatoria ? 'Sim' : 'Não'), align: 'center', sortable: true },
+  { name: 'acoes', label: 'Ações', field: () => '', align: 'center' }
 ]
 
 function irEvento(evento: Evento) {
