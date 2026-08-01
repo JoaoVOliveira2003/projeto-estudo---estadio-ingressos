@@ -4,7 +4,13 @@
       <Estadio :setores="setores" :nome-estadio="nomeEstadio" @selecionar-assento="clicarAssento" :cidade="cidade" />
     </div>
   </q-page>
-  <ModalCompraIngresso v-model="modalAberto" :setor="setorSelecionado" :assento="assentoSelecionado" />
+  <ModalCompraIngresso 
+    v-model="modalAberto" 
+    :setor="setorSelecionado" 
+    :assento="assentoSelecionado" 
+    :evento=evento
+  />
+
 </template>
 <script setup lang="ts">
 

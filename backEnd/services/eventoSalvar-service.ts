@@ -8,4 +8,3 @@ export async function gravarevento(
   const eventoCriado = await evento_query.salvarEvento(evento)
   return eventoCriado
 }
-

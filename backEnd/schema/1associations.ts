@@ -2,6 +2,7 @@ import { EstadioSchema } from "./estadio-schema";
 import { setorSchema } from "./setor-schema";
 import { assentoSchema } from "./assento-schema";
 import { eventoSchema } from "./evento-schema";
+import { ingressoSchema } from "./ingresso-schema";
 
 
 EstadioSchema.hasMany(setorSchema, {
