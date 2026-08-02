@@ -1,9 +1,8 @@
 import {Router} from "express";
-import { ingressoController } from '../controllers/ingressoController';
+import { IngressoController } from '../controllers/ingressoController';
 
 export const routerIngress = Router();
 
-routerIngress.post("/criarIngress",async(req,res)=> await ingressoController.salvaringresso(req,res));
-routerIngress.get("/",async(req,res)=> await ingressoController.getTodosIngresos(req,res));
+routerIngress.post("/criarIngresso",async(req,res)=> await IngressoController.salvarIngresso(req,res));
 
 export default routerIngress

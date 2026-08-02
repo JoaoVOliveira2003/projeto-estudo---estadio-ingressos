@@ -1,5 +1,13 @@
 npx sequelize-cli migration:generate --name create-NOMETABELA
 npx sequelize-cli db:migrate
 
+npx sequelize-cli seed:generate --name nome-do-seed
+npx sequelize-cli db:seed:all
+
 rodar:
+
 npm run dev
+
+ngrok http 3000
+
+http://127.0.0.1:4040/inspect/http

@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import {  } from "../services/IngressoSalvar-service";
+import { gravarIngresso } from "../services/IngressoSalvar-service";
 
 export namespace IngressoController {
   export async function salvarIngresso(req: Request, res: Response) {
     try {
-      const dados = req.body.Ingresso;
+      const dados = req.body.ingresso;
       const IngressoCriado = await gravarIngresso(dados);
       res.status(201).json(IngressoCriado);
     } catch (error) {

@@ -50,4 +50,17 @@ export class ingressoQuery {
       throw error;
     }
   }
+
+  async atualizarStatus(cod_ingresso: number, codStatus: number) {
+    try {
+      return await ingressoSchema.update(
+        { cod_status: codStatus },
+        { where: { cod_ingresso: cod_ingresso } }
+      );
+    } catch (error) {
+      throw error;
+    }
+  }
+
+
 }

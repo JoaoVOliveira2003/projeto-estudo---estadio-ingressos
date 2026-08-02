@@ -126,19 +126,28 @@ async function avancar() {
 
 async function realizarPagamento() {
   const dados = {
-    id: props.assento?.desc_assento,
+    cod_assento: props.assento?.cod_assento,
     titulo: 'Ingresso assento:'+ props.assento?.desc_assento,
     evento: props.evento?.cod_evento,
     quantidade: 1,
-    valorUnitario: props.evento?.preco
+    cod_status: 2,
+    data_compra: new Date(),
+    codigo_qrcode: crypto.randomUUID(),
+    valorUnitario: props.evento?.preco,
+    cod_evento: props.evento?.cod_evento
   }
   const gravado = await salvarIngresso(dados)
   if(gravado){
-    const data = await iniciarPagamento(dados)
+    const data = await iniciarPagamento({
+      titulo: dados.titulo,
+      quantidade: dados.quantidade,
+      valorUnitario: dados.valorUnitario,
+      cod_ingresso: gravado.cod_ingresso, 
+    })
     return data
   }
-  
 }
+
 function fechar() {
   emit('update:modelValue', false)
 }

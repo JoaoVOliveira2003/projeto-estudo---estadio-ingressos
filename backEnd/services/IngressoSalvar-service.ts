@@ -1,11 +1,11 @@
-import { IngressoQuery } from "../schema/ingresso-schema"
+import { ingressoQuery } from "../schema/ingresso-schema"
 import { ingressoInterface } from "../interfaces/ingressoInterface"
 
 export async function gravarIngresso(
   ingresso: ingressoInterface,
-  ingresso_query: IngressoQuery = new IngressoQuery(),
+  ingresso_query: ingressoQuery = new ingressoQuery(),
 ) {
-  const ingressoCriado = await ingresso_query.salvaringresso(ingresso)
+  const ingressoCriado = await ingresso_query.salvarIngresso(ingresso)
   return ingressoCriado
 }
 
