@@ -4,6 +4,7 @@ import { eventoInterface } from "../interfaces/eventoInterface";
 import { assentoSchema } from "./assento-schema";
 import { setorSchema } from "./setor-schema";
 import { EstadioSchema } from "./estadio-schema";
+import { ingressoSchema } from "./ingresso-schema";
 
 export const eventoSchema = conecta.define(
   "evento",
@@ -79,6 +80,12 @@ export class eventoQuery {
                 {
                   model: assentoSchema,
                   as: "assentos_setor",
+                  include: [
+                    {
+                      model: ingressoSchema,
+                      as: "evento_ingresso",
+                    },
+                  ],
                 },
               ],
             },

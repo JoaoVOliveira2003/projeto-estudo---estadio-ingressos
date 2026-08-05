@@ -117,3 +117,19 @@
   font-size: 13px;
   opacity: 0.85;
 }
+
+.cadeira-livre {
+  background: green;
+}
+
+.cadeira-pendente {
+  background: orange;
+}
+
+.cadeira-aprovada {
+  background: rgb(255, 2, 2);
+}
+
+.cadeira-indisponivel {
+  background: rgb(255, 0, 0);
+}

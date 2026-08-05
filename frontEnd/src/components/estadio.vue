@@ -31,8 +31,11 @@
         <template v-else>
           <div v-for="(assentosFileira, fileira) in fileirasPorSetor[setor.cod_setor ?? setor.posicao]" :key="fileira"
             class="fileira-cadeiras">
-            <div class="cadeira" v-for="assento in assentosFileira" :key="assento.cod_assento"
-              @click="clicarAssento(setor, assento)"></div>
+            <div :class="[
+              'cadeira',
+              classeAssento(assento)
+            ]" v-for="assento in assentosFileira" :key="assento.cod_assento" @click="clicarAssento(setor, assento)">
+            </div>
           </div>
         </template>
       </div>
@@ -52,6 +55,7 @@ import 'src/css/estadio.scss'
 import { ref, computed } from 'vue';
 import type { setorInterface } from '../interfaces/setorInterface';
 import type { assentoInterface } from '../interfaces/assentoInterface';
+
 
 const props = defineProps<{
   setores: setorInterface[]
@@ -110,6 +114,21 @@ const emit = defineEmits<{
 
 function clicarAssento(setor: setorInterface, assento: assentoInterface) {
   emit('selecionar-assento', setor, assento)
+}
+
+function classeAssento(assento: assentoInterface) {
+  const status = assento.evento_ingresso?.[0]?.cod_statu
+
+  switch (status) {
+    case 2:
+      return 'cadeira-pendente'
+
+    case 3:
+      return 'cadeira-aprovada'
+
+    default:
+      return 'cadeira-livre'
+  }
 }
 
 const zoom = ref(1)

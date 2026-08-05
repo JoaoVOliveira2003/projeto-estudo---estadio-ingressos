@@ -29,3 +29,12 @@ eventoSchema.belongsTo(EstadioSchema,{
   foreignKey: "cod_estadio",
   as: "evento_estadio",
 })
+
+assentoSchema.hasMany(ingressoSchema, {
+  foreignKey: "cod_assento",
+  as: "evento_ingresso",
+});
+
+ingressoSchema.belongsTo(assentoSchema, {
+  foreignKey: "cod_assento",
+});
